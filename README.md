@@ -4,7 +4,7 @@ Vue 와 firebase 를 이용한 블로그 형태의 사이트
 
 사용기술
 ---
-+ vue cli 3
++ nuxt
 + axios
 + vuex
 + firebase
