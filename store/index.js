@@ -64,6 +64,13 @@ const store = () => new Vuex.Store({
       }).catch((err) =>{
         console.log(err)
       })
+    },
+    reCommend: ({commit} , addLike ) => {
+      axios.put('https://vue-blog-83289.firebaseio.com/posts/'+addLike[0].id+'/'+'like' +'.json', addLike[0].like).then((response) => {
+        console.log(response)
+      }).catch((err) =>{
+        console.log(err)
+      })
     }
   },
 })

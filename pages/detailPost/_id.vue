@@ -1,18 +1,24 @@
 <template>
   <div class="detailPost">
     <div class="detailContainer" v-for="currentPost in currentPosts" :key="currentPost.id">
-      <div class="author">
-        작성자 - {{currentPost.author}}
+      <div class="detailContentBox">
+        <div class="author">
+          작성자 - {{currentPost.author}}
+        </div>
+        <div class="title">
+          <h1>
+            {{currentPost.title}}
+          </h1>
+        </div>
+        <div class="content"> 
+          {{currentPost.content}}
+        </div>
+          <div @click="reCommend" class="detailLikeBox">
+          추천합니다 <i class="far fa-thumbs-up"></i>
+          {{ currentPost.like }}
+        </div>
       </div>
-      <div class="title">
-        <h1>
-          {{currentPost.title}}
-        </h1>
-      </div>
-      <div class="content"> 
-        {{currentPost.content}}
-      </div>
-
+      
       <div class="detailToolBox">
         <router-link v-bind:to="'/editPost/' + currentPost.id">
           <span class="detailEdit">
@@ -46,6 +52,10 @@ export default{
       .then(()=>{
           this.$router.push({ path: '/' })
         })
+    },
+    reCommend(){
+      this.currentPosts[0].like += 1 
+      this.$store.dispatch('reCommend', this.currentPosts)
     }
   },
   created(){
@@ -68,19 +78,32 @@ export default{
     .detailContainer{
       margin-top:50px; 
 
-      .author{
-        padding-left:1rem;
-      }
-      .title{
+      .detailContentBox{
         border-bottom:1px solid #ccc;
-        padding:1rem;
+
+        .author{
+        padding-left:1rem;
+        }
+        .title{
+          border-bottom:1px solid #ccc;
+          padding:1rem;
+        }
+
+        .content{
+          padding:0rem 1rem;
+          white-space:pre-line;
+        }
       }
 
-      .content{
-        padding:0rem 1rem;
-        white-space:pre-line;
-      }
+      .detailLikeBox{
+        text-align:center;
+        cursor: pointer;
 
+        padding:4% 0%;
+        i{
+          font-size:32px;
+        }
+      }
       .detailToolBox{
         text-align:right;
         padding:5% 1%;

@@ -23,7 +23,8 @@ export default {
       newPost: {
         title:'',
         content:'',
-        author:''
+        author:'',
+        like:0
       }
     }
   },
